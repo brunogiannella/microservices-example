@@ -1,0 +1,32 @@
+version: '3.5'
+services:
+    host01:
+        #API EM GO
+        build:
+            dockerfile: ./Dockerfile
+            context: ./microservices/sync/pessoas-cpf-get
+        image: microservices/host01:latest
+        container_name: host01-api
+        networks: 
+            - ms-network
+    host02:
+        #API EM PYTHON
+        build:
+            dockerfile: ./Dockerfile
+            context: ./microservices/sync/pessoas-cpf-endereco-get
+        image: microservices/host02:latest
+        container_name: host02-api
+        networks: 
+            - ms-network
+    host03:
+        #API EM JS
+        build:
+            dockerfile: ./Dockerfile
+            context: ./microservices/sync/pessoas-cpf-bens
+        image: microservices/host03:latest
+        container_name: host03-api
+        networks: 
+            - ms-network
+networks: 
+    ms-network:
+        driver: bridge
